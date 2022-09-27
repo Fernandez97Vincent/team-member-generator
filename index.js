@@ -189,11 +189,11 @@ const addingEmployee = () => {
     ])
 
     .then(employeeInput => {
-        let { name, id, email, role} = employeeInput
+        let { name, id, email, role, github, school, confirmAddition } = employeeInput
         let newEmployee;
 
         if (role === 'Engineer') {
-            newEmployee = new Engineer (name, id, email, role, github, school, confirmAddition);
+            newEmployee = new Engineer (name, id, email, role, github);
             console.log(newEmployee);
         }
 
@@ -201,10 +201,23 @@ const addingEmployee = () => {
             newEmployee = new Intern (name, id, email, school);
             console.log(newEmployee);
         }
+
+        // push employee into array
+        teamMembers.push(newEmployee);
+
+        // to continue adding employees after the confirmation we should use an if statement
+        // confirmaddition was giving an error due it being in the return statement
+        if (confirmAddition) {
+            return addingEmployee(teamMembers);
+        }
+        else {
+            return teamMembers;
+        }
     })
 }
 // run the functions
 addManager()
 // after add manager we add employees
     .then(addingEmployee);
+    console.log(teamMembers);
 // after adding employees we can push it into the teamMember array
