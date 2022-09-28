@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+header {
+    background-color: orange;
+    text-align: center;
+    height: 2;
+}
+.card-container {
+   display:flex;
+   justify-content: center;
+   align-items: center;
+   margin: 0;
+}
+
+.card {
+    margin: 15px;
+    border: 1px solid black;
+    height: 10rem;
+    line-height: 2rem;
+}

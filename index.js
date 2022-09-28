@@ -197,6 +197,7 @@ const addingEmployee = () => {
             console.log(newEmployee);
         }
 
+
         else if (role === 'Intern') {
             newEmployee = new Intern (name, id, email, school);
             console.log(newEmployee);
@@ -215,9 +216,17 @@ const addingEmployee = () => {
         }
     })
 }
+
+const writeFile = data => {
+    fs.writeFile('index.html', data);
+}
+
 // run the functions
 addManager()
 // after add manager we add employees
     .then(addingEmployee);
-    console.log(teamMembers);
+    console.log(teamMembers)
 // after adding employees we can push it into the teamMember array
+    .then(teamMembers => {
+        return createHTML(teamMembers);
+    })
