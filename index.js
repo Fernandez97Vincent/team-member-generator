@@ -1,5 +1,5 @@
 // need to create a script that creates an html
-
+const createHTML = require('./createHTML');
 // import the employees
 
 const Manager = require('./lib/manager');
@@ -95,7 +95,7 @@ const addingEmployee = () => {
     return inquirer.prompt ([
         { // specify whether they are an intern or an engineer
             type: 'list',
-            name: 'job',
+            name: 'role',
             message: 'What is the employee\'s role',
             choices: ['Intern', 'Engineer']
         },
@@ -218,15 +218,29 @@ const addingEmployee = () => {
 }
 
 const writeFile = data => {
-    fs.writeFile('index.html', data);
-}
+    fs.writeFile('./index.html', data, err => {
+        // if there is an error 
+        if (err) {
+            console.log(err);
+            return;
+        // when the profile has been created 
+        } else {
+            console.log("Your team profile has been successfully created! Please check out the index.html")
+        }
+    })
+}; 
 
 // run the functions
 addManager()
 // after add manager we add employees
-    .then(addingEmployee);
-    console.log(teamMembers)
+    .then(addingEmployee)
 // after adding employees we can push it into the teamMember array
     .then(teamMembers => {
         return createHTML(teamMembers);
     })
+    .then(pageHTML => {
+        return writeFile(pageHTML);
+    })
+    .catch(err => {
+    console.log(err);
+     });

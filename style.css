@@ -20,3 +20,10 @@ header {
     height: 10rem;
     line-height: 2rem;
 }
+
+.body {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
